@@ -1,41 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import 'redux'
-import {connect} from 'react-redux'
+import createStore from './store';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import 'react-toastify/dist/ReactToastify.css';
+import Wrapper from './components/Wrapper';
 
-function App(props) {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {props.test}
-        </a>
-      </header>
-    </div>
-  );
-}
 
-const mapStateToProps = (state) => {
-  return {
-    test: state.test
 
-  }
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-   
-  };
- }
+const store = createStore();
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: 'rgb(39,49,66)',
+    },
+    secondary: {
+      main: 'rgb(197,208,222)',
+    },
+    background: {
+      default: 'rgb(226,231,238)',
+    },
+  },
+});
 
- export default connect(mapStateToProps, mapDispatchToProps)(App);
+const App = () => (
+  <MuiThemeProvider theme={theme}>
+    <CssBaseline />
+    <Provider store={store}>
+      <Wrapper>
+        <ToastContainer />
+          <h1>Testing</h1>
+      </Wrapper>
+    </Provider>
+  </MuiThemeProvider>
+);
+
+export default App;
