@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'redux'
+import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -16,11 +18,24 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {props.test}
         </a>
       </header>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    test: state.test
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+   
+  };
+ }
+
+ export default connect(mapStateToProps, mapDispatchToProps)(App);
